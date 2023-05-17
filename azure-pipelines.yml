@@ -12,25 +12,25 @@ jobs:
   displayName: Build for Android
   pool:
     vmImage: 'windows-latest'
-  steps:
-  - task: DownloadSecureFile@1
-    displayName: Get releaseKeyStore.jks
-    name: releaseKeyStore
-    inputs:
-      secureFile: 'releaseKeyStore.jks'
-  - pwsh: |
-      Write-Host "##vso[task.setvariable variable=keyAlias;]$(androidKeystoreKeyAlias)"
-      Write-Host "##vso[task.setvariable variable=keyPassword;]$(androidKeystoreKeyPassword)"
-      Write-Host "##vso[task.setvariable variable=storeFile;]$(releaseKeyStore.secureFilePath)"
-      Write-Host "##vso[task.setvariable variable=storePassword;]$(androidKeystorePassword)"
-    displayName: "set keystore environment variables"
-  - task: DownloadSecureFile@1
-    displayName: Get google-services.json
-    name: googleServicesJson
-    inputs:
-      secureFile: 'google-services.json'
-  - pwsh: Move-Item $(googleServicesJson.secureFilePath) android/app/ -Force
-    displayName: Override google-services.json
+#   steps:
+#   - task: DownloadSecureFile@1
+#     displayName: Get releaseKeyStore.jks
+#     name: releaseKeyStore
+#     inputs:
+#       secureFile: 'releaseKeyStore.jks'
+#   - pwsh: |
+#       Write-Host "##vso[task.setvariable variable=keyAlias;]$(androidKeystoreKeyAlias)"
+#       Write-Host "##vso[task.setvariable variable=keyPassword;]$(androidKeystoreKeyPassword)"
+#       Write-Host "##vso[task.setvariable variable=storeFile;]$(releaseKeyStore.secureFilePath)"
+#       Write-Host "##vso[task.setvariable variable=storePassword;]$(androidKeystorePassword)"
+#     displayName: "set keystore environment variables"
+#   - task: DownloadSecureFile@1
+#     displayName: Get google-services.json
+#     name: googleServicesJson
+#     inputs:
+#       secureFile: 'google-services.json'
+#   - pwsh: Move-Item $(googleServicesJson.secureFilePath) android/app/ -Force
+#     displayName: Override google-services.json
   - task: FlutterInstall@0
     displayName: Install Flutter
     inputs:
